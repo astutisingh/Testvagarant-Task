@@ -35,7 +35,10 @@ def calculate_amount(Basket):
     GST_Dict = {}
     TotalAmount = 0
     for dic in Basket:
-        GST = (dic["Unit_Price"]*(dic["GST"]/100))
+        unit_price = dic["Unit_Price"]
+        if unit_price > 500:
+            unit_price = unit_price - 0.5*unit_price
+        GST = (unit_price*(dic["GST"]/100))
         GST_Dict[dic["Product"]] = GST
         # print(GST_Dict)
         TotalAmount+=(dic["Unit_Price"]+GST)*dic["Quantity"]
